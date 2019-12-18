@@ -1,0 +1,8 @@
+server:
+  port: 16379
+
+spring:
+  redis:
+    host: 106.52.101.109
+    port: 6379
+    database: 0
