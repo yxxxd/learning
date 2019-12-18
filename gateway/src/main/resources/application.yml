@@ -1,0 +1,39 @@
+server:
+  port: 4000
+
+spring:
+  #redis:
+  #  port: 6379
+  #  host: localhost
+  application:
+    name: client-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          #表明gateway开启服务注册和发现的功能，并且spring cloud gateway自动根据服务发现为每一个服务创建了一个router，
+          # 这个router将以服务名开头的请求路径转发到对应的服务
+          enabled: true
+          #将请求路径上的服务名配置为小写
+          lower-case-service-id: true
+      routes:
+        - id: auth
+          ## lb：负载均衡
+          uri: lb://auth
+          order: -1
+          predicates:
+            - Path=/auth/**
+          filters:
+            # 请求时去掉path前缀
+            - StripPrefix=1
+            - JwtAuthFilter
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+url:
+  ignore: /login,/registry
+

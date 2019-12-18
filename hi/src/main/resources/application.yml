@@ -1,0 +1,39 @@
+eureka:
+  client:
+    serviceUrl:
+      #defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://10.206.142.160:8761/eureka/
+
+server:
+  port: 8762
+
+spring:
+  application:
+    name: service-hi
+  datasource:
+    url: jdbc:mysql://10.206.142.160:3306/framework?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+    username: wlw
+    password: Test%123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+#security:
+#  oauth2:
+#    resource:
+#      # 获取当前token的用户信息
+#      user-info-uri: http://localhost:5000/auth/user-info
+#    client:
+#      clientId: service-hi
+#      clientSecret: 123456
+#      # 获取 token
+#      accessTokenUri: http://localhost:5000/auth/oauth/token
+#      grant-type: password,refresh_token
+#      scope: server
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

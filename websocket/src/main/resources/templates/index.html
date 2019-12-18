@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<input type="text" id="name">
+<button onclick="send()">触发事件</button>
+<input type="text" id="progress" value="0">
+<script src="jquery.js"></script>
+<script>
+
+    function send() {
+        var code = $('#name').val();
+        var websocket;
+        if ('WebSocket' in window) {
+            websocket = new WebSocket('ws://localhost:8763/websocket/'+code);
+        } else {
+            alert("你的浏览器暂不支持websocket,请更换其他浏览器再试");
+        }
+        websocket.onopen = function(event) {
+            console.log('建立连接');
+        }
+        //关闭事件
+        websocket.onclose = function(event) {
+            console.log("连接关闭");
+        }
+        //获得消息事件
+        websocket.onmessage = function(event) {
+            console.log("收到消息：" + event.data);
+            $("#progress").val(event.data);
+        }
+
+        //发生了错误事件
+        websocket.onerror = function(event) {
+            console.log("websocket 通信发生错误");
+        }
+        window.onbeforeunload = function(event) {
+            websocket.close();
+        }
+        //websocket.send(msg)
+        //console.log(msg)
+        $.ajax({
+            url: '/test/sendMessage/' + code,
+            type: 'get',
+            success: function (data) {
+                console.log(data)
+
+            }
+        })
+    }
+</script>
+</body>
+</html>

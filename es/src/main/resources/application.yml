@@ -1,0 +1,16 @@
+#spring:
+#  data:
+#    elasticsearch:
+#      cluster-name: yuxudong
+#      #cluster-nodes: 10.206.142.160:9300
+#      cluster-nodes: 192.168.21.31:9300
+#      properties:
+#        path:
+#          logs: ./elasticsearch/log
+#          data: ./elasticsearch/data
+
+server:
+  port: 8024
+
+logging:
+  config: classpath:logback.xml

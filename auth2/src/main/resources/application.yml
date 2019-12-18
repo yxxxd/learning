@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: auth
+
+  datasource:
+    url: jdbc:mysql://10.206.142.160:3306/framework?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+    username: wlw
+    password: Test%123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  redis:
+    host: 10.206.142.160
+    port: 6379
+    password: Test%123
+
+
+server:
+  port: 5000
+  servlet:
+    context-path: /auth
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
