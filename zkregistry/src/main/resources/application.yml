@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    zookeeper:
+      connect-string: 106.52.101.109:2181
+      discovery:
+        enabled: true
+
+server:
+  port: 8781
+endpoints:
+  zookeeper:
+    enabled: true
+
+zookeeper:
+  address: 106.52.101.109:2181
+  timeout: 4000
